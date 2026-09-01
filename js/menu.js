@@ -1,4 +1,4 @@
-// Omarchy-style menu overlay — ctrl+enter, keyboard nav, type-to-filter, submenus.
+// Omarchy-style menu overlay — alt+space, keyboard nav, type-to-filter, submenus.
 (function (global) {
     'use strict';
 
@@ -327,8 +327,8 @@
     // ------------------------------------------------------------- keys
 
     document.addEventListener('keydown', (e) => {
-        // Toggle: ctrl+enter (or meta+enter on mac)
-        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        // Toggle: alt+space (or meta+space on mac)
+        if ((e.altKey || e.metaKey) && e.code === 'Space') {
             e.preventDefault();
             if (opened) close(); else open();
             return;

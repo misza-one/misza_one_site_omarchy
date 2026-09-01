@@ -26,7 +26,7 @@
             { html: '  <span class="t-bold">close</span>           <span class="t-dim">close this window</span>' },
             { html: '  <span class="t-bold">omarchy</span>         <span class="t-dim">about omarchy</span>' },
             { html: '  <span class="t-bold">keybinds</span>        <span class="t-dim">window keybinds (alt+k)</span>' },
-            { html: '  <span class="t-bold">menu</span>            <span class="t-dim">open the menu (alt+k)</span>' },
+            { html: '  <span class="t-bold">menu</span>            <span class="t-dim">open the menu (alt+space)</span>' },
             { text: '' },
             { html: '  <span class="t-bold">whoami · date · uptime · echo</span> <span class="t-dim">·</span> <span class="t-bold">clear</span>', class: 'dim' },
             { text: '' },

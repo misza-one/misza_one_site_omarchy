@@ -21,7 +21,7 @@
         { group: 'windows', chord: 'alt + ↑', action: 'Focus window above', run: () => global.WM.focusDirection('up') },
         { group: 'windows', chord: 'alt + ↓', action: 'Focus window below', run: () => global.WM.focusDirection('down') },
         { group: 'menus', chord: 'alt + k', action: 'Keybindings — this menu' },
-        { group: 'menus', chord: 'ctrl + enter', action: 'Omarchy menu', run: () => global.Menu.open() },
+        { group: 'menus', chord: 'alt + space', action: 'Omarchy menu', run: () => global.Menu.open() },
         { group: 'terminal', chord: 'enter', action: 'Run command' },
         { group: 'terminal', chord: '↑ / ↓', action: 'Command history' },
         { group: 'terminal', chord: 'ctrl + l', action: 'Clear terminal' },

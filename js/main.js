@@ -45,7 +45,7 @@
         //   alt+enter  split (new window)
         //   alt+w      kill focused window
         //   alt+arrow  focus window in direction
-        //   alt+k      keybindings menu (the omarchy menu is ctrl+enter)
+        //   alt+k      keybindings menu (the omarchy menu is alt+space)
         document.addEventListener('keydown', (e) => {
             if (!(e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey)) return;
             const k = e.key.toLowerCase();
