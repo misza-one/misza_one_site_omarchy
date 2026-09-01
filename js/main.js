@@ -27,7 +27,7 @@
                     { text: '' },
                     { html: 'type <span class="t-accent">help</span> to see what you can do here.' },
                     { text: '' },
-                    { html: '<span class="t-dim">shift+enter</span> <span class="t-dim">split ·</span> <span class="t-dim">shift+w</span> <span class="t-dim">close ·</span> <span class="t-dim">shift+←→↑↓</span> <span class="t-dim">focus ·</span> <span class="t-dim">shift+k</span> <span class="t-dim">keybinds</span>', class: 'dim' }
+                    { html: '<span class="t-dim">alt+enter</span> <span class="t-dim">split ·</span> <span class="t-dim">alt+w</span> <span class="t-dim">close ·</span> <span class="t-dim">alt+←→↑↓</span> <span class="t-dim">focus ·</span> <span class="t-dim">alt+k</span> <span class="t-dim">keybinds</span>', class: 'dim' }
                 ];
                 let i = 0;
                 (function step() {
@@ -42,12 +42,12 @@
 
         // Global keybinds (hyprland-style), capture phase so they win over
         // the terminal input's own key handling:
-        //   shift+enter  split (new window)
-        //   shift+w      kill focused window
-        //   shift+arrow  focus window in direction
-        //   shift+k      keybindings menu (the omarchy menu is ctrl+enter)
+        //   alt+enter  split (new window)
+        //   alt+w      kill focused window
+        //   alt+arrow  focus window in direction
+        //   alt+k      keybindings menu (the omarchy menu is ctrl+enter)
         document.addEventListener('keydown', (e) => {
-            if (!(e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey)) return;
+            if (!(e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey)) return;
             const k = e.key.toLowerCase();
             const overlayOpen =
                 (global.Menu && global.Menu.isOpen()) ||

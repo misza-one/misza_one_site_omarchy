@@ -36,7 +36,7 @@
             this.hintEl.className = 'desktop-hint';
             this.hintEl.innerHTML =
                 '<div class="desktop-hint-row">' +
-                    '<span class="desktop-hint-key">shift</span>' +
+                    '<span class="desktop-hint-key">alt</span>' +
                     '<span class="desktop-hint-plus">+</span>' +
                     '<span class="desktop-hint-key">enter</span>' +
                 '</div>' +
@@ -208,12 +208,12 @@
 
         // --------------------------------------------------------- actions
 
-        // Shift+w / `close`: kill the focused window (hyprland killactive).
+        // Alt+w / `close`: kill the focused window (hyprland killactive).
         closeFocused() {
             if (this.focusedId) this.close(this.focusedId);
         }
 
-        // Shift+arrow: focus the closest window in the given direction
+        // Alt+arrow: focus the closest window in the given direction
         // (hyprland dispatch:focuswindow).
         focusDirection(dir) {
             const target = this.rects.get(this.focusedId);
@@ -239,7 +239,7 @@
             if (best) this.focus(best);
         }
 
-        // Shift+enter / `split`: new window, layout re-derived.
+        // Alt+enter / `split`: new window, layout re-derived.
         split() {
             const win = this.open();
             if (!win) {

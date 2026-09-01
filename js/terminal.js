@@ -135,7 +135,7 @@
                 }
                 if (e.key === 'Enter') {
                     e.preventDefault();
-                    if (e.shiftKey) return; // Shift+Enter → WM split (main.js)
+                    if (e.altKey) return; // Alt+Enter → WM split (main.js)
                     this.submit();
                 } else if (e.key === 'ArrowUp') {
                     e.preventDefault();

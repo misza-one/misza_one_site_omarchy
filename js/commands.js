@@ -21,16 +21,16 @@
             { html: '  <span class="t-bold">plugin</span> &lt;name&gt;    <span class="t-dim">plugin details</span>' },
             { html: '  <span class="t-bold">contact</span>         <span class="t-dim">find me online</span>' },
             { html: '  <span class="t-bold">theme</span> [&lt;name&gt;]   <span class="t-dim">list / switch themes</span>' },
-            { html: '  <span class="t-bold">split</span>           <span class="t-dim">new terminal window (shift+enter)</span>' },
+            { html: '  <span class="t-bold">split</span>           <span class="t-dim">new terminal window (alt+enter)</span>' },
             { html: '  <span class="t-bold">tiles</span>           <span class="t-dim">map of open windows</span>' },
             { html: '  <span class="t-bold">close</span>           <span class="t-dim">close this window</span>' },
             { html: '  <span class="t-bold">omarchy</span>         <span class="t-dim">about omarchy</span>' },
-            { html: '  <span class="t-bold">keybinds</span>        <span class="t-dim">window keybinds (shift+k)</span>' },
-            { html: '  <span class="t-bold">menu</span>            <span class="t-dim">open the menu (shift+k)</span>' },
+            { html: '  <span class="t-bold">keybinds</span>        <span class="t-dim">window keybinds (alt+k)</span>' },
+            { html: '  <span class="t-bold">menu</span>            <span class="t-dim">open the menu (alt+k)</span>' },
             { text: '' },
             { html: '  <span class="t-bold">whoami · date · uptime · echo</span> <span class="t-dim">·</span> <span class="t-bold">clear</span>', class: 'dim' },
             { text: '' },
-            { html: '  <span class="t-dim">windows auto-arrange (dwindle) —</span> <span class="t-accent">shift+enter</span> <span class="t-dim">split, </span><span class="t-accent">shift+w</span> <span class="t-dim">close, </span><span class="t-accent">shift+←→↑↓</span> <span class="t-dim">focus.</span>' }
+            { html: '  <span class="t-dim">windows auto-arrange (dwindle) —</span> <span class="t-accent">alt+enter</span> <span class="t-dim">split, </span><span class="t-accent">alt+w</span> <span class="t-dim">close, </span><span class="t-accent">alt+←→↑↓</span> <span class="t-dim">focus.</span>' }
         ]);
     }, { aliases: ['?', 'commands'] });
 
@@ -164,7 +164,7 @@
         const lines = ctx.WM.map();
         out([
             { text: 'windows', class: 'section' },
-            { html: '  <span class="t-dim">' + ctx.WM.count() + ' open — </span><span class="t-accent">shift+enter</span> <span class="t-dim">splits, ✕ closes, layout re-tiles</span>' },
+            { html: '  <span class="t-dim">' + ctx.WM.count() + ' open — </span><span class="t-accent">alt+enter</span> <span class="t-dim">splits, ✕ closes, layout re-tiles</span>' },
             { text: '' }
         ].concat(lines.map(l => ({ text: l }))));
     }, { aliases: ['map'] });
@@ -212,7 +212,7 @@
         const { out, esc } = ctx;
         out([
             { text: 'keybinds', class: 'section' },
-            { html: '  <span class="t-dim">the full list lives in the</span> <span class="t-accent">shift+k</span> <span class="t-dim">menu</span>' },
+            { html: '  <span class="t-dim">the full list lives in the</span> <span class="t-accent">alt+k</span> <span class="t-dim">menu</span>' },
             { text: '' }
         ]);
         for (const group of global.KEYBIND_GROUPS) {

@@ -1,4 +1,4 @@
-// Keybindings — a dedicated overlay (shift+k), omarchy-style: a searchable
+// Keybindings — a dedicated overlay (alt+k), omarchy-style: a searchable
 // list of every chord on the site, "CHORD → action". Selecting a row
 // dispatches the action, like omarchy-menu-keybindings.
 (function (global) {
@@ -14,13 +14,13 @@
     ];
 
     const KEYBINDS = [
-        { group: 'windows', chord: 'shift + enter', action: 'Split — new terminal window', run: () => global.WM.split() },
-        { group: 'windows', chord: 'shift + w', action: 'Close focused window', run: () => global.WM.closeFocused() },
-        { group: 'windows', chord: 'shift + ←', action: 'Focus window left', run: () => global.WM.focusDirection('left') },
-        { group: 'windows', chord: 'shift + →', action: 'Focus window right', run: () => global.WM.focusDirection('right') },
-        { group: 'windows', chord: 'shift + ↑', action: 'Focus window above', run: () => global.WM.focusDirection('up') },
-        { group: 'windows', chord: 'shift + ↓', action: 'Focus window below', run: () => global.WM.focusDirection('down') },
-        { group: 'menus', chord: 'shift + k', action: 'Keybindings — this menu' },
+        { group: 'windows', chord: 'alt + enter', action: 'Split — new terminal window', run: () => global.WM.split() },
+        { group: 'windows', chord: 'alt + w', action: 'Close focused window', run: () => global.WM.closeFocused() },
+        { group: 'windows', chord: 'alt + ←', action: 'Focus window left', run: () => global.WM.focusDirection('left') },
+        { group: 'windows', chord: 'alt + →', action: 'Focus window right', run: () => global.WM.focusDirection('right') },
+        { group: 'windows', chord: 'alt + ↑', action: 'Focus window above', run: () => global.WM.focusDirection('up') },
+        { group: 'windows', chord: 'alt + ↓', action: 'Focus window below', run: () => global.WM.focusDirection('down') },
+        { group: 'menus', chord: 'alt + k', action: 'Keybindings — this menu' },
         { group: 'menus', chord: 'ctrl + enter', action: 'Omarchy menu', run: () => global.Menu.open() },
         { group: 'terminal', chord: 'enter', action: 'Run command' },
         { group: 'terminal', chord: '↑ / ↓', action: 'Command history' },

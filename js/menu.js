@@ -52,9 +52,9 @@
     }
 
     ITEMS['style.theme'] = { icon: '◐', label: 'Theme', title: 'Theme' };
-    ITEMS['system.split'] = { icon: '⧉', label: 'New Terminal Window', detail: 'shift+enter', action: () => global.WM.split() };
+    ITEMS['system.split'] = { icon: '⧉', label: 'New Terminal Window', detail: 'alt+enter', action: () => global.WM.split() };
     ITEMS['system.map'] = { icon: '▦', label: 'Window Map', detail: 'tiles command', action: () => runCmd('tiles') };
-    ITEMS['system.keybinds'] = { icon: '⌨', label: 'Keybindings', detail: 'shift+k', action: () => global.Keybinds.open() };
+    ITEMS['system.keybinds'] = { icon: '⌨', label: 'Keybindings', detail: 'alt+k', action: () => global.Keybinds.open() };
     ITEMS['system.clear'] = { icon: '⌫', label: 'Clear terminal', action: () => { const t = global.WM.focusedTerm(); if (t) t.clear(); } };
     ITEMS['system.reload'] = { icon: '↻', label: 'Reload site', action: () => location.reload() };
 

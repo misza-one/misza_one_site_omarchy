@@ -83,7 +83,7 @@ body {
 
 .bar-windows {
     font-size: 11px;
-    color: var(--muted);
+    color: var(--accent);
 }
 
 .bar-spacer {
@@ -92,7 +92,7 @@ body {
 
 .bar-hint {
     font-size: 11px;
-    color: var(--muted);
+    color: var(--accent);
     padding: 3px 8px;
     border-radius: 6px;
     border: 1px solid var(--card-border);
@@ -108,7 +108,7 @@ body {
 }
 
 .bar-clock {
-    color: var(--muted);
+    color: var(--accent);
     font-variant-numeric: tabular-nums;
 }
 
@@ -166,7 +166,7 @@ body {
     flex-direction: column;
     background: var(--background);
     border: 1px solid var(--card-border);
-    border-radius: 10px;
+    border-radius: 0;
     overflow: hidden;
     box-shadow: 0 4px 24px color-mix(in srgb, var(--darker-background) 50%, transparent);
 }
@@ -424,7 +424,7 @@ body {
     color: var(--muted);
     background: transparent;
     border: 1px solid var(--card-border);
-    border-radius: 999px;
+    border-radius: 0;
     padding: 4px 12px;
     cursor: pointer;
     transition: color 120ms ease, border-color 120ms ease, background 120ms ease;
