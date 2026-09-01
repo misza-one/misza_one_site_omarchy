@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>misza.one — terminal</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="bar">
+        <span class="bar-badge">misza.one</span>
+        <span class="bar-windows" id="barWindows">1 window</span>
+        <span class="bar-spacer"></span>
+        <span class="bar-hint" id="barHint">shift+k keybinds &middot; shift+&#8964; split &middot; shift+w close</span>
+        <span class="bar-clock" id="clock">--:--</span>
+    </header>
+
+    <main class="desktop" id="desktop"></main>
+
+    <!-- omarchy-style menu overlay -->
+    <div class="menu-scrim" id="menuScrim" hidden>
+        <div class="menu-card" id="menuCard" role="menu">
+            <div class="menu-search">
+                <span class="menu-search-icon">&#9906;</span>
+                <input type="text" id="menuInput" placeholder="type to search…" autocomplete="off" spellcheck="false">
+            </div>
+            <div class="menu-list" id="menuList"></div>
+            <div class="menu-footer">
+                <span>&uarr;&darr; navigate</span>
+                <span>&#9166; select</span>
+                <span>&larr; back</span>
+                <span>esc close</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/themes.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/terminal.js"></script>
+    <script src="js/commands.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/keybinds.js"></script>
+    <script src="js/windows.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
