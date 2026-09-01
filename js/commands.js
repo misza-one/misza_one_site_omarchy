@@ -66,13 +66,24 @@
 
     // --------------------------------------------------------------- plugins
 
+    // Flexible token match: "Matte Black" / "matte-black" / "matteblack"
+    // all normalize to "matteblack" (case, spaces, hyphens, underscores ignored).
+    const norm = (s) => String(s).toLowerCase().replace(/[\s\-_]+/g, '');
+
     function pluginById(query) {
         if (!query) return null;
-        const q = query.toLowerCase();
-        const byId = D.plugins.find(p => p.id.toLowerCase() === q || p.id.toLowerCase().endsWith('.' + q));
-        if (byId) return byId;
-        const byName = D.plugins.find(p => p.name.toLowerCase() === q);
-        return byName || null;
+        const q = norm(query);
+        const raw = query.toLowerCase();
+        let hit = D.plugins.find(p => norm(p.name) === q);
+        if (hit) return hit;
+        hit = D.plugins.find(p => norm(p.id) === q);
+        if (hit) return hit;
+        // id suffix: "omaherd" -> io.github.salemsayed.omaherd
+        hit = D.plugins.find(p => p.id.toLowerCase().endsWith('.' + raw));
+        if (hit) return hit;
+        // convenience: a unique name substring ("home" -> Home Assistant)
+        const sub = D.plugins.filter(p => p.name.toLowerCase().includes(raw));
+        return sub.length === 1 ? sub[0] : null;
     }
 
     register('plugins', function (args, ctx) {
@@ -99,7 +110,7 @@
 
     register('plugin', function (args, ctx) {
         const { out, esc } = ctx;
-        const p = pluginById(args[0]);
+        const p = pluginById(args.join(' '));
         if (!p) {
             out([
                 { text: 'usage: plugin <name>', class: 'red' },
@@ -149,13 +160,16 @@
             ]);
             return;
         }
-        const name = args[0].toLowerCase();
-        if (global.Themes.set(name)) {
-            out({ html: '  theme set: <span class="t-bold">' + esc(name) + '</span>' });
-        } else {
-            out({ html: '  <span class="t-red">unknown theme:</span> ' + esc(name) + ' <span class="t-dim">— see</span> <span class="t-accent">theme</span>' });
+        const wanted = norm(args.join(' '));
+        const themes = global.Themes.all(); // [{ id, label }]
+        const match = themes.find(t => norm(t.id) === wanted)
+            || themes.find(t => norm(t.label) === wanted);
+        if (!match || !global.Themes.set(match.id)) {
+            out({ html: '  <span class="t-red">unknown theme:</span> ' + esc(args.join(' ')) + ' <span class="t-dim">— see</span> <span class="t-accent">theme</span>' });
+            return;
         }
-    });
+        out({ html: '  theme set: <span class="t-bold">' + esc(match.label) + '</span>' });
+    }, { aliases: ['themes'] });
 
     // ----------------------------------------------------------------- tiles
 
