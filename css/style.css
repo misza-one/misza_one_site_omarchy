@@ -128,7 +128,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    color: var(--muted);
+    color: var(--foreground);
     user-select: none;
     pointer-events: none;
     z-index: 0;
@@ -142,9 +142,10 @@ body {
 
 .desktop-hint-key {
     font-size: 13px;
+    color: var(--accent);
     border: 1px solid var(--card-border);
     border-bottom-width: 2px;
-    border-radius: 6px;
+    border-radius: 0;
     padding: 3px 10px;
     background: var(--row-bg);
 }
