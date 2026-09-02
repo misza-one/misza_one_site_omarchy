@@ -120,6 +120,19 @@ body {
     overflow: hidden;
 }
 
+.desktop-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(56vw, 920px);
+    height: auto;
+    opacity: 0.1;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
 .desktop-hint {
     position: absolute;
     inset: 0;
@@ -170,6 +183,7 @@ body {
     border-radius: 0;
     overflow: hidden;
     box-shadow: 0 4px 24px color-mix(in srgb, var(--darker-background) 50%, transparent);
+    z-index: 1;
 }
 
 .desktop.layout-anim .window {
