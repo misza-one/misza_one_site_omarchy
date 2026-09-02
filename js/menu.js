@@ -15,14 +15,18 @@
 
     // ------------------------------------------------------------- menu tree
 
+    const NO_TERM_CMDS = new Set(['theme', 'split', 'clear', 'tiles', 'reload', 'menu']);
+
     function runCmd(cmd) {
         const parts = cmd.trim().split(/\s+/);
         const name = parts[0];
         const args = parts.slice(1);
-        const term = global.WM && global.WM.focusedTerm();
+        let term = global.WM && global.WM.focusedTerm();
+        if (!term && global.WM && !NO_TERM_CMDS.has(name)) {
+            const win = global.WM.open();
+            if (win) term = win.term;
+        }
         if (term) { term.run(cmd); return; }
-        // No terminal open: still run the command so side-effect commands
-        // (e.g. theme) work. Display-only output is dropped (no-op out).
         const noopEsc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
         const ctx = {
             out: () => {},
