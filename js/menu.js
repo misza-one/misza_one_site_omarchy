@@ -16,8 +16,23 @@
     // ------------------------------------------------------------- menu tree
 
     function runCmd(cmd) {
+        const parts = cmd.trim().split(/\s+/);
+        const name = parts[0];
+        const args = parts.slice(1);
         const term = global.WM && global.WM.focusedTerm();
-        if (term) term.run(cmd);
+        if (term) { term.run(cmd); return; }
+        // No terminal open: still run the command so side-effect commands
+        // (e.g. theme) work. Display-only output is dropped (no-op out).
+        const noopEsc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        const ctx = {
+            out: () => {},
+            echo: () => {},
+            esc: noopEsc,
+            link: (u, l) => noopEsc(l || u),
+            Terminal: null,
+            WM: global.WM || null
+        };
+        if (global.Commands) global.Commands.run(name, args, ctx);
     }
 
     const ITEMS = {

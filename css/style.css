@@ -128,9 +128,13 @@ body {
     width: min(56vw, 920px);
     height: auto;
     opacity: 0.1;
+    fill: var(--accent);
     pointer-events: none;
     user-select: none;
     z-index: 0;
+}
+.desktop-logo g {
+    fill: var(--accent);
 }
 
 .desktop-hint {
