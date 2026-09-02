@@ -24,13 +24,14 @@
             { html: '  <span class="t-bold">split</span>           <span class="t-dim">new terminal window (alt+enter)</span>' },
             { html: '  <span class="t-bold">tiles</span>           <span class="t-dim">map of open windows</span>' },
             { html: '  <span class="t-bold">close</span>           <span class="t-dim">close this window</span>' },
+            { html: '  <span class="t-bold">swap</span> &lt;dir&gt;      <span class="t-dim">move focused window (alt+shift+arrows)</span>' },
             { html: '  <span class="t-bold">omarchy</span>         <span class="t-dim">about omarchy</span>' },
             { html: '  <span class="t-bold">keybinds</span>        <span class="t-dim">window keybinds (alt+k)</span>' },
             { html: '  <span class="t-bold">menu</span>            <span class="t-dim">open the menu (alt+space)</span>' },
             { text: '' },
             { html: '  <span class="t-bold">whoami · date · uptime · echo</span> <span class="t-dim">·</span> <span class="t-bold">clear</span>', class: 'dim' },
             { text: '' },
-            { html: '  <span class="t-dim">windows auto-arrange (dwindle) —</span> <span class="t-accent">alt+enter</span> <span class="t-dim">split, </span><span class="t-accent">alt+w</span> <span class="t-dim">close, </span><span class="t-accent">alt+←→↑↓</span> <span class="t-dim">focus.</span>' }
+            { html: '  <span class="t-dim">windows auto-arrange (dwindle) —</span> <span class="t-accent">alt+enter</span> <span class="t-dim">split, </span><span class="t-accent">alt+w</span> <span class="t-dim">close, </span><span class="t-accent">alt+←→↑↓</span> <span class="t-dim">focus, </span><span class="t-accent">alt+shift+←→↑↓</span> <span class="t-dim">move.</span>' }
         ]);
     }, { aliases: ['?', 'commands'] });
 
@@ -199,6 +200,23 @@
             ctx.WM.close(id);
         }
     }, { aliases: ['exit-window', 'quit-window'] });
+
+    // Swap the focused window with its nearest neighbour in a direction
+    // (dwindle "swap", omarchy `SUPER + SHIFT + arrow` -> swapwindow).
+    register('swap', function (args, ctx) {
+        const raw = (args[0] || '').toLowerCase();
+        const map = { l: 'left', r: 'right', u: 'up', d: 'down' };
+        const dir = map[raw] || (['left', 'right', 'up', 'down'].includes(raw) ? raw : null);
+        if (!dir) {
+            ctx.out([{ html: '  <span class="t-red">usage: swap &lt;left|right|up|down&gt;</span> <span class="t-dim">— alt+shift+arrows</span>' }]);
+            return;
+        }
+        if (ctx.WM.swapDirection(dir)) {
+            ctx.out([{ html: '  <span class="t-green">✓</span> swapped <span class="t-bold">' + dir + '</span>' }]);
+        } else {
+            ctx.out([{ html: '  <span class="t-yellow">nothing to swap</span> <span class="t-dim">— no window ' + dir + '</span>' }]);
+        }
+    }, { aliases: ['move'] });
 
     // --------------------------------------------------------------- omarchy
 

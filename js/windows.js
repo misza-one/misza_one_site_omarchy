@@ -213,30 +213,58 @@
             if (this.focusedId) this.close(this.focusedId);
         }
 
-        // Alt+arrow: focus the closest window in the given direction
-        // (hyprland dispatch:focuswindow).
-        focusDirection(dir) {
-            const target = this.rects.get(this.focusedId);
-            if (!target) return;
+        // Closest window to `fromId` in the given direction (hyprland's
+        // directional search, by centre-to-centre distance). Returns an id or
+        // null when there is no window that way.
+        neighborId(dir, fromId) {
+            const target = this.rects.get(fromId);
+            if (!target) return null;
             const tx = target.x + target.w / 2;
             const ty = target.y + target.h / 2;
+            // Pick the nearest window along the primary axis, breaking ties by
+            // the secondary axis so a symmetric grid resolves to the directly
+            // adjacent (same row/column) tile rather than a diagonal one.
             let best = null;
-            let bestDist = Infinity;
+            let bestD1 = Infinity;
+            let bestD2 = Infinity;
             for (const id of this.windows.keys()) {
-                if (id === this.focusedId) continue;
+                if (id === fromId) continue;
                 const r = this.rects.get(id);
                 if (!r) continue;
                 const cx = r.x + r.w / 2;
                 const cy = r.y + r.h / 2;
-                let dist;
-                if (dir === 'left') { if (cx >= tx) continue; dist = tx - cx; }
-                else if (dir === 'right') { if (cx <= tx) continue; dist = cx - tx; }
-                else if (dir === 'up') { if (cy >= ty) continue; dist = ty - cy; }
-                else if (dir === 'down') { if (cy <= ty) continue; dist = cy - ty; }
+                let d1, d2;
+                if (dir === 'left') { if (cx >= tx) continue; d1 = tx - cx; d2 = Math.abs(cy - ty); }
+                else if (dir === 'right') { if (cx <= tx) continue; d1 = cx - tx; d2 = Math.abs(cy - ty); }
+                else if (dir === 'up') { if (cy >= ty) continue; d1 = ty - cy; d2 = Math.abs(cx - tx); }
+                else if (dir === 'down') { if (cy <= ty) continue; d1 = cy - ty; d2 = Math.abs(cx - tx); }
                 else continue;
-                if (dist < bestDist) { bestDist = dist; best = id; }
+                if (d1 < bestD1 || (d1 === bestD1 && d2 < bestD2)) { bestD1 = d1; bestD2 = d2; best = id; }
             }
+            return best;
+        }
+
+        // Alt+arrow: focus the closest window in the given direction
+        // (hyprland dispatch:focuswindow).
+        focusDirection(dir) {
+            const best = this.neighborId(dir, this.focusedId);
             if (best) this.focus(best);
+        }
+
+        // Alt+shift+arrow: swap the focused window with the closest window in
+        // the given direction (omarchy `SUPER + SHIFT + arrow` -> swapwindow).
+        // The tree structure is unchanged, only the two leaves exchange slots,
+        // so the rest re-tiles. Focus follows the moved window. Returns true
+        // when a swap happened.
+        swapDirection(dir) {
+            if (!this.focusedId) return false;
+            const other = this.neighborId(dir, this.focusedId);
+            if (!other) return false;
+            this.tree = Layout.dwindleSwap(this.tree, this.focusedId, other);
+            this.applyLayout(true);
+            this.focus(this.focusedId); // stays focused, brought to front
+            this.emit();
+            return true;
         }
 
         // Alt+enter / `split`: new window, layout re-derived.

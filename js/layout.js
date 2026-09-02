@@ -113,6 +113,24 @@
         return { t: 'split', d: tree.d, a, b };
     }
 
+    // ---------------------------------------------------------- swap
+
+    // Swap two windows in the tree (dwindle "swap"). In a dwindle tree every
+    // window is a leaf, so swapping is just exchanging the two leaves in
+    // place — the split structure (and any ratios) is untouched, only which
+    // window sits where. Returns the new tree.
+    function dwindleSwap(tree, idA, idB) {
+        function rec(node) {
+            if (node.t === 'win') {
+                if (node.id === idA) return { t: 'win', id: idB };
+                if (node.id === idB) return { t: 'win', id: idA };
+                return node;
+            }
+            return { t: 'split', d: node.d, a: rec(node.a), b: rec(node.b) };
+        }
+        return rec(tree);
+    }
+
     // -------------------------------------------------------------- misc
 
     function collectWindows(tree, rect, out) {
@@ -172,6 +190,7 @@
         layoutRects,
         dwindleAdd,
         dwindleRemove,
+        dwindleSwap,
         collectWindows,
         asciiMap,
         root: () => null
