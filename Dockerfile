@@ -1,5 +1,5 @@
 # misza.one omarchy terminal site - static file server
-FROM nginx:alpine
+FROM nginx:1.27-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY index.html /usr/share/nginx/html/
 COPY favicon.png /usr/share/nginx/html/
