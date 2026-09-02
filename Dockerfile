@@ -5,6 +5,7 @@ COPY index.html /usr/share/nginx/html/
 COPY favicon.png /usr/share/nginx/html/
 COPY css/ /usr/share/nginx/html/css/
 COPY js/ /usr/share/nginx/html/js/
+COPY img/ /usr/share/nginx/html/img/
 EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
     CMD wget --quiet --tries=1 --spider http://127.0.0.1/health || exit 1
