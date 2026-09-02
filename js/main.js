@@ -91,9 +91,12 @@
 
     function startClock() {
         const clockEl = document.getElementById('clock');
+        const DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         function tick() {
             const now = new Date();
-            clockEl.textContent = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            clockEl.textContent = DOW[now.getDay()] + ' ' + hh + ':' + mm;
         }
         tick();
         setInterval(tick, 1000);
